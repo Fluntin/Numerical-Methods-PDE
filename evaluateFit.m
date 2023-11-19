@@ -1,3 +1,5 @@
+% This is code for the Math described in the problem stament.
+
 function result = evaluateFit(x, y, coefficients, kappa)
     [numParams, ~] = size(coefficients);
     N = floor((sqrt(numParams) - 1) / 2);

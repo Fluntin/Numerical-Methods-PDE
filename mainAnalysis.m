@@ -11,3 +11,5 @@ N = 15;
 paramsF = leastSquaresFit(points, f(points), N, numPoints, 2 * pi);
 paramsV1 = leastSquaresFit(points, v1(points), N, numPoints, 2 * pi);
 paramsV2 = leastSquaresFit(points, v2(points), N, numPoints, 2 * pi);
+
+% The code above describes a procedure for fitting a function to a set of points.

@@ -1,3 +1,7 @@
+% This is the function that computes the least squares fit of the input.
+% The input is a set of points and the corresponding values at those points.
+% The output is the coefficients of the least squares fit.
+
 function coefficients = leastSquaresFit(inputPoints, inputValues, N, numPoints, kappa)
     numParams = (2 * N + 1) ^ 2;
     matrix = zeros(numPoints, numParams);
