@@ -1,0 +1,74 @@
+\newpage
+\subsubsection{Method of Characteristics:}
+The change of \( u \) along the curve \( \gamma(s) \) equals the product of the velocity of the curve \( \gamma^{\prime}(s) \) and the gradient of \( u \) at \( \gamma(s) \).\\\\
+This can be expressed as:
+\begin{align}
+    \frac{d}{ds} u(\gamma(s)) &= \nabla u(\gamma(s)) \cdot \gamma'(s) \\
+    \gamma'(s) &= v(\gamma(s)) \\
+    \Rightarrow \frac{d}{ds} u(\gamma(s)) &= v(\gamma(s)) \cdot \nabla u(\gamma(s)) \\
+    \frac{d}{d s} u(\gamma(s)) &= \gamma^{\prime}(s) \cdot \nabla u(\gamma(s)) = v(\gamma(s)) \cdot \nabla u(\gamma(s))
+\end{align}
+Here, \( \gamma(s) \) represents the characteristic curve parameterized by \( s \), and \( \gamma^{\prime}(s) \) is its derivative \\
+with respect to \( s \). This implies \( \gamma^{\prime}(s) = v(\gamma(s)) = \gamma(s) \), leading to a system of differential equations.\\\\
+Considering the system of ODEs:
+\begin{align}
+    \gamma_1'(s) &= \gamma_1(s), \\
+    \gamma_2'(s) &= \gamma_2(s)
+\end{align}
+
+To solve each ODE:
+\begin{align}
+    \gamma_1(s) &= \gamma_1(0) e^s, \\
+    \gamma_2(s) &= \gamma_2(0) e^s
+\end{align}
+
+Combining solutions into vector form:
+\begin{equation}
+    \gamma(s) = \left(\gamma_1(0) e^s, \gamma_2(0) e^s\right)^T
+\end{equation}
+
+\textbf{Solving the Differential Equation:}
+
+\begin{enumerate}
+    \item Start with the differential equation:
+    \begin{equation}
+        \frac{d}{ds} u(\gamma(s)) = 2 u(\gamma(s))
+    \end{equation}
+
+    \item Find the general solution for \( y' = ky \) which is \( y = Ce^{ks} \):
+    \begin{equation}
+        u(\gamma(s)) = Ce^{2s}
+    \end{equation}
+
+    \item Use the initial condition \( u(\gamma(0)) \) to find \( C \):
+    \begin{equation}
+        u(\gamma(0)) = Ce^{2 \cdot 0} \Rightarrow C = u(\gamma(0))
+    \end{equation}
+
+    \item The final solution is:
+    \begin{equation}
+        u(\gamma(s)) = u(\gamma(0)) e^{2s}
+    \end{equation}
+\end{enumerate}
+
+\textbf{Finding \( u \):}
+
+\begin{enumerate}
+    \item Initial function setup:
+    \begin{equation}
+        \gamma(0) = \left(x_1, x_2\right)
+    \end{equation}
+
+    \item Evaluating \( u \) at different points along the characteristic curve:
+    \begin{equation}
+        u\left(x_1 \mathrm{e}^s, x_2 \mathrm{e}^s\right) \mathrm{e}^{-2 s} = u\left(x_1, x_2\right) \quad \forall s \in \mathbb{R}
+    \end{equation}
+
+    \item Applying the substitution \( s = -\log(x_2) \):
+    \begin{align}
+        u\left(\frac{x_1}{x_2}, 1\right) x_2^2 &= u\left(x_1, x_2\right) \\
+        u\left(\frac{x_1}{x_2}, 1\right) &= g\left(\frac{x_1}{x_2}\right) \\
+        u(x_1, x_2) &= g\left(\frac{x_1}{x_2}\right) x_2^2
+    \end{align}
+\end{enumerate}
+Here we have assumed that the function \( g \) is differentiable.
