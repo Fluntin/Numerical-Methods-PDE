@@ -33,3 +33,4 @@ function coefficients = CalculateFourierCoefficients(numberOfCoefficients, condi
         end
     end
 end
+

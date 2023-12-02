@@ -42,3 +42,4 @@ function solutionMatrix = SolveDiffusionEquation(spatialPoints, timePoints, simu
         end
     end
 end
+

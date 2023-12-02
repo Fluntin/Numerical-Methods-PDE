@@ -22,3 +22,4 @@ function PlotFiniteDifference(initialConditionType)
         colorbar; % Add colorbar to display the heat legend
     end
 end
+
