@@ -6,7 +6,7 @@ function PlotFourierSeries(initialConditionType)
     % initialConditionType - Flag for initial condition type 
     % (0 for g(x) = x(pi-x), otherwise g(x) = x on [0,pi/2], 0 on [pi/2, pi])
     % Test 123
-    termsArray = [5, 50, 500]; % Number of Fourier terms
+    termsArray = [2, 8, 64]; % Number of Fourier terms
     spatialPoints = 30;        % Number of spatial points
     timePoints = 20;           % Number of time points
     spatialStep = pi/(spatialPoints - 1);  % Spatial step size
@@ -38,6 +38,3 @@ function PlotFourierSeries(initialConditionType)
         colorbar; % Add colorbar to display the heat legend
     end
 end
-
-
-

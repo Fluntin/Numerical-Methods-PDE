@@ -6,7 +6,7 @@ function PlotFiniteDifference(initialConditionType)
     % initialConditionType - Flag for initial condition type 
     % (0 for g(x) = x(pi-x), otherwise g(x) = x on [0,pi/2], 0 on [pi/2, pi])
 
-    resolutionLevels = [5, 25, 50]; % Array of spatial resolutions to plot
+    resolutionLevels = [8, 16, 32]; % Array of spatial resolutions to plot
     for currentResolution = resolutionLevels
         solutionPoints = FiniteDifferenceSolver(currentResolution, 50*currentResolution, 5, initialConditionType);
         spatialAxis = linspace(0, pi, currentResolution);
@@ -22,4 +22,3 @@ function PlotFiniteDifference(initialConditionType)
         colorbar; % Add colorbar to display the heat legend
     end
 end
-
