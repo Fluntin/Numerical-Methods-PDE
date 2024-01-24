@@ -72,4 +72,3 @@ plot(xx, yy);
 title('Finite Element Method Solution');
 xlabel('x');
 ylabel('Solution y');
-

@@ -15,7 +15,6 @@ clear all;
 
 boundary_value = 1;              % Boundary value at x=1
 
-
 %----------------------------------------------------------------
 % Define the number of mesh points
 num_mesh_points = 10;           % Number of mesh points
