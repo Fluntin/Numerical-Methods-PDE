@@ -4,21 +4,21 @@ clear all;
 %----------------------------------------------------------------
 
 % Alternative => 1
-% f_x = @(x) exp(x); a_x = @(x) exp(x);  
-
+ f_x = @(x) exp(x); a_x = @(x) exp(x);  
+ real_solution = @(x) (1+exp(1))*(1-exp(-1*x)) - x; % Exact solution for alt 1
 %----------------------------------------------------------------
 
 % Alternative => 2
-f_x = @(x) 0; a_x = @(x) 1 + x;          
-     
+% f_x = @(x) 0; a_x = @(x) 1 + x;          
+% real_solution =@(x) log(1+x);     
 %----------------------------------------------------------------
 
 boundary_value = 1;              % Boundary value at x=1
-real_solution = @(x) (1+exp(1))*(1-exp(-1*x)) - x; % Exact solution
+
 
 %----------------------------------------------------------------
 % Define the number of mesh points
-num_mesh_points = 100;           % Number of mesh points
+num_mesh_points = 10;           % Number of mesh points
 x_values = linspace(0, 1, num_mesh_points + 1); % Equally spaced mesh points
 
 for gauss_order = 1:2
