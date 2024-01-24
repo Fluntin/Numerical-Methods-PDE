@@ -28,7 +28,8 @@ target = zeros(num_elements, 1);
 for i = 1:num_elements
     v_prime = finite_elements_derivative{i};
     v = finite_elements{i};
-    target(i) = gauss_integrate(@(x) f_x(x) .* v(x), (i-1)/num_elements, (i+1)/num_elements, 2);
+    target(i) = integrate(@(x) f_x(x) .* v(x), 0, 2);
+    %target(i) = gauss_integrate(@(x) f_x(x) .* v(x), (i-1)/num_elements, (i+1)/num_elements, 2);
     
     % Add boundary condition to the target if at the last element
     if i == num_elements

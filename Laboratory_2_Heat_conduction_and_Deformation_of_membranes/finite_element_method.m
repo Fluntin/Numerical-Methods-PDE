@@ -1,12 +1,24 @@
 clear all;
-
+%----------------------------------------------------------------
 % Define functions f(x) and a(x), as well as the boundary value g
-f_x = @(x) exp(x);               % Function f(x)
-a_x = @(x) exp(x);               % Function a(x)
-boundary_value = 1;             % Boundary value at x=1
+%----------------------------------------------------------------
 
+% Alternative => 1
+% f_x = @(x) exp(x); a_x = @(x) exp(x);  
+
+%----------------------------------------------------------------
+
+% Alternative => 2
+f_x = @(x) 0; a_x = @(x) 1 + x;          
+     
+%----------------------------------------------------------------
+
+boundary_value = 1;              % Boundary value at x=1
+real_solution = @(x) (1+exp(1))*(1-exp(-1*x)) - x; % Exact solution
+
+%----------------------------------------------------------------
 % Define the number of mesh points
-num_mesh_points = 100;          % Number of mesh points: 5, 10, 20, 40, 80, 160
+num_mesh_points = 100;           % Number of mesh points
 x_values = linspace(0, 1, num_mesh_points + 1); % Equally spaced mesh points
 
 for gauss_order = 1:2
@@ -69,8 +81,8 @@ for gauss_order = 1:2
     % Solve the system of equations
     u = A \ L;
 
-    % Plot the results (code to plot the exact solution is not provided)
-    num_plot_points = 100;
+    % Plot the results
+    num_plot_points = num_mesh_points;
     plot_step = 1 / num_plot_points;
 
     xx = zeros(num_plot_points, 1);
@@ -78,26 +90,36 @@ for gauss_order = 1:2
 
     node_step = 1 / (num_mesh_points - 1);
     for j = 1:num_plot_points
-        result = 0;
         x_j = (j-1) * plot_step;
-        for i = 1:num_mesh_points
-            node = (i-1) * node_step;
-            diff = abs(x_j - node);
-            phi_i = max(0, 1 - abs(diff / node_step));
-            result = result + phi_i * u(i);
-        end
         xx(j) = x_j;
-        yy(j) = result;
+        yy(j) = sum(arrayfun(@(i) max(0, 1 - abs(x_j - (i-1) * node_step) / node_step) * u(i), 1:num_mesh_points));
     end
     figure;
-    hold on
-    plot(xx, yy);
+    hold on;
+    
+    % Plot FEM Solution
+    plot(xx, yy, 'LineWidth', 2, 'LineStyle', '-', 'Color', [1, 0, 0], 'DisplayName', 'FEM Solution'); % Red
+    
+    % Plot Exact Solution
+    plot(xx, arrayfun(real_solution, xx), 'LineWidth', 2, 'LineStyle', '--', 'Color', [0, 0, 0], 'DisplayName', 'Exact Solution'); % Black
+    
+    % Enhance the plot with labels, legend, and grid
+    xlabel('x', 'FontSize', 12);
+    ylabel('Solution', 'FontSize', 12);
+    title(['Gaussian Quadrature Order: ', num2str(gauss_order)], 'FontSize', 14);
+    legend('Location', 'best');
+    grid on;
+    box on;
 
-    % Plot the exact solution (code for the exact solution plot is not provided)
+% Calculate the difference between FEM and exact solution
+diff = yy' - arrayfun(real_solution, x_values(1:end-1)); % Ensure diff has size n
 
-    gauss_order
-    num_mesh_points
-    diff = yy - real(xx);          % Calculate the difference between FEM and exact
-    energy_norm = energynorm(a_x, diff); % Calculate the energy norm
+% Calculate the energy norm
+energy_norm = calculate_energy_norm(a_x, diff, x_values);
+disp(['Energy norm for Gauss order ', num2str(gauss_order), ': ', num2str(energy_norm)]);
+
 end
 
+function energy_norm = calculate_energy_norm(a, diff, x_values)
+    energy_norm = sqrt(sum(arrayfun(@(i) a((x_values(i) + x_values(i+1))/2) * (diff(i+1) - diff(i))^2 / (x_values(i+1) - x_values(i)), 1:length(x_values)-2)));
+end
