@@ -7,7 +7,7 @@
 Hamiltonian = @(momentum, position) (0.5*norm(momentum)^2 - 1/norm(position));
 
 % Set simulation parameters
-eccentricity = 0.1;  % Eccentricity of the orbit
+eccentricity = 0.5;  % Eccentricity of the orbit
 timeStepSize = 0.005; % Time step size for numerical integration
 totalTimeSteps = 5000; % Total number of steps for the simulation
 
