@@ -7,9 +7,9 @@
 Hamiltonian = @(momentum, position) (0.5*norm(momentum)^2 - 1/norm(position));
 
 % Initialization parameters
-eccentricity = 0.5;  % Eccentricity of the orbit
+eccentricity = 0.75;  % Eccentricity of the orbit
 timeStep = 0.005;    % Time step size for numerical integration
-totalSteps = 20000;  % Total number of steps for the simulation
+totalSteps = 50000;  % Total number of steps for the simulation
 
 % Initialize arrays for position, momentum, and energy
 position = zeros(2, totalSteps);
@@ -32,20 +32,23 @@ end
 
 % Plotting the energy of the system over time
 figure;
-plot(energyHistory, 'LineWidth', 2);
+plot(energyHistory, 'LineWidth', 2, 'Color', [0.8500 0.3250 0.0980]); % Orange color for energy line
 title('System Energy Over Time');
 xlabel('Time Step');
 ylabel('Energy');
 grid on;
+set(gca, 'FontSize', 12); % Increase font size for better readability
 
 % Plotting the orbit in the position space
 figure;
-plot(position(1, :), position(2, :), 'LineWidth', 2);
+plot(position(1, :), position(2, :), 'LineWidth', 2, 'Color', [0 0.4470 0.7410]); % Blue color for orbit line
 title('Orbit in Position Space');
 xlabel('X Position');
 ylabel('Y Position');
 axis equal;
 grid on;
+set(gca, 'FontSize', 12); % Increase font size for better readability
+
 
 % Midpoint method function definition
 function [newMomentum, newPosition] = midstep(momentum, position, timeStep)

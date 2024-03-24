@@ -7,9 +7,9 @@
 HamiltonianEnergy = @(momentum, position) (0.5*norm(momentum)^2 - 1/norm(position));
 
 % Set parameters
-eccentricity = 0.5; % Eccentricity of the orbit, must be between 0 and 1
+eccentricity = 0.75; % Eccentricity of the orbit, must be between 0 and 1
 timeStepSize = 0.05; % Time step size for numerical integration
-totalTimeSteps = 5000; % Total number of time steps for the simulation
+totalTimeSteps = 2500; % Total number of time steps for the simulation
 
 % Initialize arrays for position, momentum, and energy
 position = zeros(2, totalTimeSteps);
@@ -33,17 +33,20 @@ end
 
 % Plotting the energy of the system over time for visualization
 figure;
-plot(energyHistory, 'LineWidth', 2);
+plot(energyHistory, 'LineWidth', 2, 'Color', [0.8500 0.3250 0.0980]); % Orange color for energy line
 title('System Energy Over Time');
 xlabel('Time Step');
 ylabel('Energy');
 grid on;
+set(gca, 'FontSize', 12); % Increase font size for better readability
 
 % Plotting the orbit in position space for visualization
 figure;
-plot(position(1, :), position(2, :), 'LineWidth', 2);
+plot(position(1, :), position(2, :), 'LineWidth', 2, 'Color', [0 0.4470 0.7410]); % Blue color for orbit line
 title('Orbit in Position Space');
 xlabel('X Position');
 ylabel('Y Position');
 axis equal; % Ensure equal scaling for x and y axis to visualize the orbit correctly
 grid on;
+set(gca, 'FontSize', 12); % Increase font size for better readability
+

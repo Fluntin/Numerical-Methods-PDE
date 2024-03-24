@@ -7,9 +7,9 @@
 Hamiltonian = @(momentum, position) (0.5*norm(momentum)^2 - 1/norm(position));
 
 % Initial parameters setup
-eccentricity = 0.5;
+eccentricity = 0.75;
 timeStep = 0.005;
-totalSteps = 3500;
+totalSteps = 1000;
 
 % Initialize position, momentum, and energy arrays
 position = zeros(2, totalSteps);
@@ -32,20 +32,23 @@ end
 
 % Plot the energy over time
 figure;
-plot(energyArray, 'LineWidth', 2);
+plot(energyArray, 'LineWidth', 2, 'Color', [0.8500 0.3250 0.0980]); % Orange color for energy line
 title('System Energy Over Time');
 xlabel('Time Step');
 ylabel('Energy');
 grid on;
+set(gca, 'FontSize', 12); % Increase font size for better readability
 
 % Plot the orbit in position space
 figure;
-plot(position(1,:), position(2,:), 'LineWidth', 2);
+plot(position(1,:), position(2,:), 'LineWidth', 2, 'Color', [0 0.4470 0.7410]); % Blue color for orbit line
 title('Orbit in Position Space');
 xlabel('X Position');
 ylabel('Y Position');
 axis equal;
 grid on;
+set(gca, 'FontSize', 12); % Increase font size for better readability
+
 
 % backwardstep function definition
 function [newp, newq] = backwardstep(p, q, h)
