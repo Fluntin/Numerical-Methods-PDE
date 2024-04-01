@@ -21,6 +21,7 @@ period = 500; % Time period over which to solve the equations
 initialConditions = [1 - eccentricity; 0; 0; sqrt((1 + eccentricity) / (1 - eccentricity))];
 
 % Solve the differential equations using ode45
+% ode45 is a MATLAB function for solving ordinary differential equations
 % ode45 is suitable for solving non-stiff differential equations and is more accurate for long time spans compared to Euler and midpoint methods
 [time, solution] = ode45(@keplerEquations, [0, period], initialConditions);
 
