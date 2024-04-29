@@ -183,14 +183,24 @@ classdef (Sealed = true) blsEuropeanOption < handle
         hqr = surf(obj.spotPrices, obj.timeToExpiry, z, gradient(z, diff(obj.spotPrices(1, 1:2)), diff(obj.timeToExpiry(1:2))));
         view(-125, 30);
         
-        xlabel('Spot price');
-        ylabel('Time to expiration');
-        zlabel(label);
+        xlabel('Stock price in $','FontSize', 14, 'FontWeight', 'bold');
+        ylabel('Time to Maturity in Years','FontSize', 14, 'FontWeight', 'bold');
+        zlabel('Option Value in $','FontSize', 14, 'FontWeight', 'bold');
         
         set(hqr, 'FaceAlpha', .6);
         set(hqr, 'EdgeAlpha', .2);
         set(hqr, 'FaceLighting', 'phong');
         set(hqr, 'FaceColor', 'interp');
+
+        % Add grid lines for better visualization
+        grid on;
+        grid minor;
+        
+        % Customize colormap for better aesthetics
+        colormap('hsv');
+        view( 45,150); % Adjust the viewing angle
+
+
       end
       function x = normpdfPrima(obj, d)
         x = (exp((-d.^2)./2)./sqrt(2*pi));

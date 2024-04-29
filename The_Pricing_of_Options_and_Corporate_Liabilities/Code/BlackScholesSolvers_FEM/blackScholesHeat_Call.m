@@ -1,18 +1,18 @@
 clc, clear, close all
 %% Given Data
-K = 1000; % Strike Price
-Stock_Price = 1145.45; % Current Stock Price
-sigma = 62.51/100; % Implied Volatility
-r = 0.02441; % Assume 2 Percent. Close to US 10 Year Treasury Yield
+K = 100; % Strike Price
+Stock_Price = 100; % Current Stock Price
+sigma = 60/100; % Implied Volatility
+r = 0.1; % Assume 2 Percent. Close to US 10 Year Treasury Yield
 
-T = 255/365.25; % Years Until Expiration
-dtao = 25.5/365.25; % 1 Day Time Steps
+T = 365.25/365.25; % Years Until Expiration
+dtao = 10/365.25; % 1 Day Time Steps
 
 tao = (0:dtao:T)'; % Tao Vector, where tao = T - t
 n_time = length(tao); % Number of Time Nodes
 n_time_steps = n_time - 1; % Number of Time Steps
 
-n_blocks = 10; % Number of Elements
+n_blocks = 100; % Number of Elements
 n_nodes = n_blocks + 1; % Linear Approximation
 fixed_dofs = [1, n_nodes]; % Node numbers of fixed DOFs
 free_dofs = setxor(1:n_nodes,fixed_dofs); % Node numbers of free DOFs
@@ -129,7 +129,9 @@ surf(tao_days, S, V_total)
 xlabel('Time Until Expiration (Days)')
 ylabel('Stock Price ($)')
 zlabel('Option Price ($)')
-title('Black-Scholes Model - Call Option Pricing')
+
+colormap("hsv") % Adds a jet colormap
+grid on % Adds a grid
 
 figure(2)
 fplot(SP, Exact_Solution, [0, L], 'LineWidth', 2)
@@ -139,7 +141,9 @@ hold off
 xlabel('Stock Price ($)')
 ylabel('Option Price ($)')
 title('Black-Scholes Equation - Call Option Pricing at tao = T')
-legend('Black-Scholes Equation', 'FE Approximation')
+legend('Analytical - 1 Year', 'Numerical - 1 Year')
+colormap("hsv") % Adds a jet colormap
+grid on % Adds a grid
 ylim([0 inf])
 
 %% Print Results
